@@ -22,6 +22,11 @@ export const submitFeedback = createServerFn({ method: "POST" })
     });
 
     if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error(
+          "The webhook isn't listening right now. If you're using the n8n test URL, click \"Listen for test event\" and try again — or activate the workflow and use its production URL.",
+        );
+      }
       throw new Error(`Failed to send feedback: ${response.status} ${response.statusText}`);
     }
 
