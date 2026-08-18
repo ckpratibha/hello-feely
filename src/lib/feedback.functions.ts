@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { feedbackSchema } from "./feedback.schema";
 
 export const submitFeedback = createServerFn({ method: "POST" })
-  .inputValidator((data) => feedbackSchema.parse(data))
+  .validator((data) => feedbackSchema.parse(data))
   .handler(async ({ data }) => {
     const webhookUrl = process.env["N8N_WEBHOOK_URL"];
 
